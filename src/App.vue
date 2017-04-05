@@ -1,14 +1,26 @@
 <template>
   <div id="app">
+    <div class="overlay" v-if="state === 'win' || state === 'lose'">
+      <div class="win" v-if="state === 'win'">
+        <span class="text">SA VÕITSID!</span>
+        <button @click="reset">Jätka mängimist</button>
+      </div>
+      <div class="lose text" v-if="state === 'lose'">
+        <span class="text">SA KAOTASID!</span>
+        <button @click="reset">Jätka mängimist</button>
+      </div>
+    </div>
     <div id="prediction-wrapper">
         <div class="prediction-title">Ennusta, milline värv õnnestub sul välja keerutada:</div>
         <div class="prediction" v-for="color in colors" v-on:click="prediction = color.hex" v-bind:style="{backgroundColor: color.hex}" v-bind:class="{ active: prediction === color.hex }"></div>
     </div>
-      <div id="arrow-wrapper">
-          <div id="arrow"></div>
-          <div id="fortune-wheel"></div>
+    <div id="arrow-wrapper">
+      <div id="arrow"></div>
+      <div class="wheel-wrapper">
+        <div id="fortune-wheel"></div>
+        <button class="spin" v-on:click="spin" v-if="state === 'fresh'">Keeruta</button>
+      </div>
     </div>
-    <button v-on:click="spin()">Keeruta</button>
   </div>
 </template>
 
@@ -32,11 +44,13 @@ export default {
           { "hex": "#009944", "name": "dark green"}
       ],
       prediction: "#8fc31f",
-      angle: 15
+      angle: 15,
+      state: 'fresh'
     }
   },
     methods: {
       spin: function () {
+          this.state = 'spinning';
           let max = 200;
           let min = 12;
           let rand = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -50,11 +64,17 @@ export default {
           if (color_index === 12) color_index = 0;
           let color = this.colors[color_index];
           console.log(color["name"]);
-          if (color["hex"] === this.prediction) {
-              console.log("Wohoo!!! Võitsid miljon eurot!");
-          } else {
-              console.log("Böööö! Kaotasid!");
-          }
+          
+          setTimeout(() => {
+            if (color["hex"] === this.prediction) {
+                this.state = 'win';
+            } else {
+                this.state = 'lose';
+            }
+          }, 3500);
+      },
+      reset() {
+        this.state = 'fresh';
       }
     }
 }
@@ -156,11 +176,58 @@ export default {
       background: #00a0e9;
   }
 
+  button::-moz-focus-inner {
+    border: 0;
+  }
+
   button:hover {
       background: #008dd3;
   }
 
   button:focus {
       outline: none;
+  }
+
+  button.spin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+  }
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99;
+    text-align: center;
+
+    .win, .lose {
+      position: absolute;
+      top: 0; bottom: 0; left: 0; right: 0;
+      margin: auto;
+      width: 800px;
+      height: 150px;
+      text-align: center;
+    }
+
+    .text {
+      font-size: 80px;
+      font-weight: bold;
+      color: gold;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      width: 200px;
+    }
   }
 </style>
