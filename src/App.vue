@@ -2,11 +2,36 @@
   <div id="app">
     <div class="overlay" v-if="state === 'win' || state === 'lose'">
       <div class="win" v-if="state === 'win'">
-        <span class="text">SA VÕITSID!</span>
+        <span class="text">
+          <span>S</span>
+          <span>A</span>
+          <span class="space"></span>
+          <span>V</span>
+          <span>Õ</span>
+          <span>I</span>
+          <span>T</span>
+          <span>S</span>
+          <span>I</span>
+          <span>D</span>
+          <span>!</span>
+        </span>
         <button @click="reset">Jätka mängimist</button>
       </div>
-      <div class="lose text" v-if="state === 'lose'">
-        <span class="text">SA KAOTASID!</span>
+      <div class="lose" v-if="state === 'lose'">
+        <span class="text">
+          <span>S</span>
+          <span>A</span>
+          <span class="space"></span>
+          <span>K</span>
+          <span>A</span>
+          <span>O</span>
+          <span>T</span>
+          <span>A</span>
+          <span>S</span>
+          <span>I</span>
+          <span>D</span>
+          <span>!</span>
+        </span>
         <button @click="reset">Jätka mängimist</button>
       </div>
     </div>
@@ -81,6 +106,9 @@ export default {
 </script>
 
 <style lang="scss">
+
+  $shadow: #222;
+
   * {
       margin: 0;
       padding: 0;
@@ -213,21 +241,102 @@ export default {
       position: absolute;
       top: 0; bottom: 0; left: 0; right: 0;
       margin: auto;
-      width: 800px;
-      height: 150px;
+      width: 900px;
+      height: 200px;
       text-align: center;
     }
 
     .text {
       font-size: 80px;
       font-weight: bold;
-      color: gold;
+      
+      .space {
+        width: 15px;
+      }
+    }
+
+    .win .text {
+      span {
+        color: gold;
+        position: relative;
+        top: 10px;
+        display: inline-block;
+        animation: bounce .3s ease infinite alternate;
+        text-shadow: 0 1px 0 $shadow,
+               0 2px 0 $shadow,
+               0 3px 0 $shadow,
+               0 4px 0 $shadow,
+               0 5px 0 $shadow,
+               0 6px 0 transparent,
+               0 7px 0 transparent,
+               0 8px 0 transparent,
+               0 9px 0 transparent,
+               0 10px 10px rgba(0, 0, 0, .4);
+      }
+
+      span:nth-child(2) { animation-delay: .1s; }
+      span:nth-child(3) { animation-delay: .2s; }
+      span:nth-child(4) { animation-delay: .3s; }
+      span:nth-child(5) { animation-delay: .4s; }
+      span:nth-child(6) { animation-delay: .5s; }
+      span:nth-child(7) { animation-delay: .6s; }
+      span:nth-child(8) { animation-delay: .7s; }
+      span:nth-child(9) { animation-delay: .8s; }
+      span:nth-child(10) { animation-delay: .9s; }
+    }
+
+    .lose .text {
+      span {
+        color: red;
+        position: relative;
+        top: 10px;
+        display: inline-block;
+        animation: bounce 1s ease 2 alternate;
+        text-shadow: 0 1px 0 $shadow,
+               0 2px 0 $shadow,
+               0 3px 0 $shadow,
+               0 4px 0 $shadow,
+               0 5px 0 $shadow,
+               0 6px 0 transparent,
+               0 7px 0 transparent,
+               0 8px 0 transparent,
+               0 9px 0 transparent,
+               0 10px 10px rgba(0, 0, 0, .4);
+      }
+
+      span:nth-child(2) { animation-delay: .1s; }
+      span:nth-child(3) { animation-delay: .2s; }
+      span:nth-child(4) { animation-delay: .3s; }
+      span:nth-child(5) { animation-delay: .4s; }
+      span:nth-child(6) { animation-delay: .5s; }
+      span:nth-child(7) { animation-delay: .6s; }
+      span:nth-child(8) { animation-delay: .7s; }
+      span:nth-child(9) { animation-delay: .8s; }
+      span:nth-child(10) { animation-delay: .9s; }
+      span:nth-child(11) { animation-delay: .9s; }
+      span:nth-child(12) { animation-delay: .9s; }
     }
 
     button {
       display: block;
-      margin: 0 auto;
+      margin: 50px auto 0 auto;
       width: 200px;
+    }
+  }
+
+  @keyframes bounce {
+    100% {
+      top: -10px;
+      text-shadow: 0 1px 0 $shadow,
+                   0 2px 0 $shadow,
+                   0 3px 0 $shadow,
+                   0 4px 0 $shadow,
+                   0 5px 0 $shadow,
+                   0 6px 0 $shadow,
+                   0 7px 0 $shadow,
+                   0 8px 0 $shadow,
+                   0 9px 0 $shadow,
+                   0 50px 25px rgba(0, 0, 0, .2);
     }
   }
 </style>
