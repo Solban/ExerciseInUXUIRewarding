@@ -12,7 +12,7 @@ export default {
   name: 'app',
   data () {
     return {
-      angle: 0
+      angle: 15
     }
   },
     methods: {
@@ -24,7 +24,7 @@ export default {
           this.angle = this.angle + (30 * rand);
 
           let wheel = document.getElementById("fortune-wheel");
-          wheel.style.transform = "rotate(-" + this.angle + "deg)";
+          wheel.style.transform = "rotate(" + this.angle + "deg)";
       }
     }
 }
@@ -60,7 +60,7 @@ export default {
     background: #cccccc;
     position: absolute;
     border-radius: 50%;
-    background: url("./assets/wheel.png") no-repeat center center;
+    background: url("./assets/wheel2.png") no-repeat center center;
     background-size: contain;
     z-index: 10;
     bottom: 280px;
@@ -70,5 +70,6 @@ export default {
     transition-duration: 1s;
     transition-property: transform;
     transition-timing-function: ease-in-out;
+    transform: rotate(15deg);
   }
 </style>
