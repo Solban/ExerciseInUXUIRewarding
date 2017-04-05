@@ -1,21 +1,9 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1></h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <div id="wheel-wrapper"></div>
+    <div id="fortune-wheel"></div>
+
+    <button v-on:click="spin()">Keeruta</button>
   </div>
 </template>
 
@@ -24,37 +12,63 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      angle: 0
     }
-  }
+  },
+    methods: {
+      spin: function () {
+          let max = 200;
+          let min = 12;
+          let rand = Math.floor(Math.random() * (max - min + 1)) + min;
+
+          this.angle = this.angle + (30 * rand);
+
+          let wheel = document.getElementById("fortune-wheel");
+          wheel.style.transform = "rotate(-" + this.angle + "deg)";
+      }
+    }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    vertical-align: top;
+  }
 
-h1, h2 {
-  font-weight: normal;
-}
+  body, html {
+    height: 100%;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  #wheel-wrapper {
+    width: 600px;
+    height: 811px;
+    background: url("./assets/wheel_wrapper.png") no-repeat center center;
+    background-size: contain;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    margin-left: -300px;
+    z-index: 100;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  #fortune-wheel {
+    width: 550px;
+    height: 550px;
+    background: #cccccc;
+    position: absolute;
+    border-radius: 50%;
+    background: url("./assets/wheel.png") no-repeat center center;
+    background-size: contain;
+    z-index: 10;
+    bottom: 280px;
+    left: 50%;
+    margin-left: -275px;
+    cursor: pointer;
+    transition-duration: 1s;
+    transition-property: transform;
+    transition-timing-function: ease-in-out;
+  }
 </style>
