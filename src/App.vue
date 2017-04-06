@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <audio id="loss-audio" src="./assets/loss3.mp3" autostart="false"></audio>
-        <audio id="win-audio" src="./assets/win_big.mp3" autostart="false"></audio>
-        <audio id="play-audio" src="./assets/full5.mp3" autostart="false"></audio>
+        <audio id="loss-audio" src="./Helid/loss3.mp3" autostart="false"></audio>
+        <audio id="win-audio" src="./Helid/win_big.mp3" autostart="false"></audio>
+        <audio id="play-audio" src="./Helid/full5.mp3" autostart="false"></audio>
         <div class="overlay" v-if="state === 'win' || state === 'lose'">
             <div class="win" v-if="state === 'win'">
         <span class="text">
@@ -34,7 +34,7 @@
           <span>I</span>
           <span>D</span>
           <span>!</span>
-        </span>
+        </span>vue
                 <button @click="reset">Jätka mängimist</button>
             </div>
         </div>
@@ -191,7 +191,7 @@
         margin: 0 auto;
         background: #cccccc;
         border-radius: 50%;
-        background: url("./assets/wheel2.png") no-repeat center center;
+        background: url("https://solban.github.io/exercise_in_UX_UI_rewarding/src/assets/wheel2.png") no-repeat center center;
         background-size: contain;
         transition-duration: 3s;
         transition-property: transform;
