@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <audio id="loss-audio" src="../Helid/loss3.mp3" autostart="false"></audio>
-        <audio id="win-audio" src="../Helid/win_big.mp3" autostart="false"></audio>
-        <audio id="play-audio" src="../Helid/full5.mp3" autostart="false"></audio>
+        <audio id="loss-audio" src="./assets/loss3.mp3" autostart="false"></audio>
+        <audio id="win-audio" src="./assets/win_big.mp3" autostart="false"></audio>
+        <audio id="play-audio" src="./assets/full5.mp3" autostart="false"></audio>
         <div class="overlay" v-if="state === 'win' || state === 'lose'">
             <div class="win" v-if="state === 'win'">
         <span class="text">
