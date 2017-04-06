@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <audio id="loss-audio" src="./Helid/loss3.mp3" autostart="false"></audio>
-        <audio id="win-audio" src="./Helid/win_big.mp3" autostart="false"></audio>
-        <audio id="play-audio" src="./Helid/full5.mp3" autostart="false"></audio>
+        <audio id="loss-audio" src="https://solban.github.io/exercise_in_UX_UI_rewarding/Helid/loss3.mp3" autostart="false"></audio>
+        <audio id="win-audio" src="https://solban.github.io/exercise_in_UX_UI_rewarding/Helid/win_big.mp3" autostart="false"></audio>
+        <audio id="play-audio" src="https://solban.github.io/exercise_in_UX_UI_rewarding/Helid/full5.mp3" autostart="false"></audio>
         <div class="overlay" v-if="state === 'win' || state === 'lose'">
             <div class="win" v-if="state === 'win'">
         <span class="text">
