@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <audio id="loss-audio" src="../Helid/loss3.mp3" autostart="false" ></audio>
+    <audio id="win-audio" src="../Helid/win_big.mp3" autostart="false" ></audio>
     <div class="overlay" v-if="state === 'win' || state === 'lose'">
       <div class="win" v-if="state === 'win'">
         <span class="text">SA VÕITSID!</span>
@@ -63,18 +65,33 @@ export default {
           let color_index = (((this.angle - 15) / 30) % 12) + 1;
           if (color_index === 12) color_index = 0;
           let color = this.colors[color_index];
-          console.log(color["name"]);
-          
+
           setTimeout(() => {
             if (color["hex"] === this.prediction) {
                 this.state = 'win';
+                this.win();
             } else {
                 this.state = 'lose';
+                this.lose();
             }
           }, 3500);
       },
       reset() {
         this.state = 'fresh';
+        let loss_audio = document.getElementById("loss-audio");
+        let win_audio = document.getElementById("win-audio");
+        loss_audio.pause();
+        loss_audio.currentTime = 0;
+        win_audio.pause();
+        win_audio.currentTime = 0;
+      },
+      lose() {
+        let audio = document.getElementById("loss-audio");
+        audio.play();
+      },
+      win() {
+          let audio = document.getElementById("win-audio");
+          audio.play();
       }
     }
 }
@@ -198,6 +215,7 @@ export default {
     width: 150px;
     height: 150px;
     border-radius: 100%;
+    font-size: 24px;
   }
 
   .overlay {
